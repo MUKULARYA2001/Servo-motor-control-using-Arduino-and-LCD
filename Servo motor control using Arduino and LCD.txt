@@ -1,0 +1,36 @@
+#include <LiquidCrystal.h>
+#include <Servo.h>
+// register shift
+int rs=7;
+// enable pin
+int enp=8;
+//four data pins
+int d4=9;
+int d5=10;
+int d6=11;
+int d7=12;
+int deltime=600;
+int servopin=13;
+int servopos1=0;
+int servopos2=180;
+LiquidCrystal mylcd(rs,enp,d4,d5,d6,d7);
+Servo myservo;
+void setup() {
+  // put your setup code here, to run once:
+  myservo.attach(servopin);
+  mylcd.begin(16,2);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  mylcd.setCursor(0,0);
+  myservo.write(servopos1);
+  for(int i=9; i>=0; i--){
+    mylcd.setCursor(0,0);
+    mylcd.print(i);
+    delay(deltime);
+  }
+  myservo.write(servopos2);
+  delay(2000);
+  mylcd.clear();
+}
